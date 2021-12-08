@@ -1,0 +1,203 @@
+{
+   "apiVersion": "apiextensions.k8s.io/v1",
+   "kind": "CustomResourceDefinition",
+   "metadata": {
+      "annotations": {
+         "cnrm.cloud.google.com/operator-version": "1.67.0",
+         "components.gke.io/component-name": "configconnector",
+         "components.gke.io/component-version": "1.67.0",
+         "controller-gen.kubebuilder.io/version": "v0.6.2",
+         "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apiextensions.k8s.io/v1\",\"kind\":\"CustomResourceDefinition\",\"metadata\":{\"annotations\":{\"cnrm.cloud.google.com/operator-version\":\"1.67.0\",\"components.gke.io/component-name\":\"configconnector\",\"components.gke.io/component-version\":\"1.67.0\",\"controller-gen.kubebuilder.io/version\":\"v0.6.2\"},\"creationTimestamp\":null,\"labels\":{\"addonmanager.kubernetes.io/mode\":\"Reconcile\",\"cnrm.cloud.google.com/operator-system\":\"true\"},\"name\":\"configconnectors.core.cnrm.cloud.google.com\"},\"spec\":{\"group\":\"core.cnrm.cloud.google.com\",\"names\":{\"kind\":\"ConfigConnector\",\"listKind\":\"ConfigConnectorList\",\"plural\":\"configconnectors\",\"singular\":\"configconnector\"},\"scope\":\"Cluster\",\"versions\":[{\"additionalPrinterColumns\":[{\"jsonPath\":\".metadata.creationTimestamp\",\"name\":\"Age\",\"type\":\"date\"},{\"description\":\"When 'true' the most recent reconcile of the ConfigConnector object succeeded\",\"jsonPath\":\".status.healthy\",\"name\":\"Healthy\",\"type\":\"string\"}],\"name\":\"v1beta1\",\"schema\":{\"openAPIV3Schema\":{\"description\":\"ConfigConnector is the Schema for the configconnectors API\",\"properties\":{\"apiVersion\":{\"description\":\"APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources\",\"type\":\"string\"},\"kind\":{\"description\":\"Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds\",\"type\":\"string\"},\"metadata\":{\"type\":\"object\"},\"spec\":{\"anyOf\":[{\"oneOf\":[{\"not\":{\"required\":[\"googleServiceAccount\"]},\"required\":[\"credentialSecretName\"]},{\"not\":{\"required\":[\"credentialSecretName\"]},\"required\":[\"googleServiceAccount\"]}],\"properties\":{\"mode\":{\"enum\":[\"cluster\"]}}},{\"not\":{\"anyOf\":[{\"required\":[\"googleServiceAccount\"]},{\"required\":[\"credentialSecretName\"]}]},\"properties\":{\"mode\":{\"enum\":[\"namespaced\"]}}}],\"description\":\"ConfigConnectorSpec defines the desired state of ConfigConnector\",\"properties\":{\"credentialSecretName\":{\"description\":\"The Kubernetes secret that contains the Google Service Account Key's credentials to be used by ConfigConnector to authenticate with Google Cloud APIs. This field is used only when in cluster mode. It's recommended to use `googleServiceAccount` when running ConfigConnector in Google Kubernetes Engine (GKE) clusters with Workload Identity enabled. This field cannot be specified together with `googleServiceAccount`.\",\"type\":\"string\"},\"googleServiceAccount\":{\"description\":\"The Google Service Account to be used by Config Connector to authenticate with Google Cloud APIs. This field is used only when running in cluster mode with Workload Identity enabled. See Google Kubernetes Engine (GKE) workload-identity (https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity) for details. This field cannot be specified together with `credentialSecretName`. For namespaced mode, use `googleServiceAccount` in ConfigConnectorContext CRD to specify the Google Service Account to be used to authenticate with Google Cloud APIs per namespace.\",\"type\":\"string\"},\"mode\":{\"description\":\"The mode that Config Connector will run in. This can be either 'cluster' or 'namespaced'. The default is 'namespaced'. Cluster mode uses a single Google Service Account to create and manage resources, even if you are using Config Connector to manage multiple Projects. You must specify either `credentialSecretName` or `googleServiceAccount` when in cluster mode, but not both. Namespaced mode allows you to use different Google service accounts for different Projects. When in namespaced mode, you must create a ConfigConnectorContext object per namespace that you want to enable Config Connector in, and each must set `googleServiceAccount` to specify the Google Service Account to be used to authenticate with Google Cloud APIs for the namespace.\",\"enum\":[\"cluster\",\"namespaced\"],\"type\":\"string\"}},\"type\":\"object\"},\"status\":{\"description\":\"ConfigConnectorStatus defines the observed state of ConfigConnector\",\"properties\":{\"errors\":{\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"healthy\":{\"type\":\"boolean\"},\"phase\":{\"type\":\"string\"}},\"required\":[\"healthy\"],\"type\":\"object\"}},\"type\":\"object\"}},\"served\":true,\"storage\":true,\"subresources\":{\"status\":{}}}]},\"status\":{\"acceptedNames\":{\"kind\":\"\",\"plural\":\"\"},\"conditions\":[],\"storedVersions\":[]}}\n"
+      },
+      "creationTimestamp": "2021-12-08T04:13:22Z",
+      "generation": 1,
+      "labels": {
+         "addonmanager.kubernetes.io/mode": "Reconcile",
+         "cnrm.cloud.google.com/operator-system": "true"
+      },
+      "name": "configconnectors.core.cnrm.cloud.google.com",
+      "resourceVersion": "4240878",
+      "uid": "4c1ac51a-1a9e-4922-b5db-eacb9986c8f1"
+   },
+   "spec": {
+      "conversion": {
+         "strategy": "None"
+      },
+      "group": "core.cnrm.cloud.google.com",
+      "names": {
+         "kind": "ConfigConnector",
+         "listKind": "ConfigConnectorList",
+         "plural": "configconnectors",
+         "singular": "configconnector"
+      },
+      "scope": "Cluster",
+      "versions": [
+         {
+            "additionalPrinterColumns": [
+               {
+                  "jsonPath": ".metadata.creationTimestamp",
+                  "name": "Age",
+                  "type": "date"
+               },
+               {
+                  "description": "When 'true' the most recent reconcile of the ConfigConnector object succeeded",
+                  "jsonPath": ".status.healthy",
+                  "name": "Healthy",
+                  "type": "string"
+               }
+            ],
+            "name": "v1beta1",
+            "schema": {
+               "openAPIV3Schema": {
+                  "description": "ConfigConnector is the Schema for the configconnectors API",
+                  "properties": {
+                     "apiVersion": {
+                        "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                        "type": "string"
+                     },
+                     "kind": {
+                        "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                        "type": "string"
+                     },
+                     "metadata": {
+                        "type": "object"
+                     },
+                     "spec": {
+                        "anyOf": [
+                           {
+                              "oneOf": [
+                                 {
+                                    "not": {
+                                       "required": [
+                                          "googleServiceAccount"
+                                       ]
+                                    },
+                                    "required": [
+                                       "credentialSecretName"
+                                    ]
+                                 },
+                                 {
+                                    "not": {
+                                       "required": [
+                                          "credentialSecretName"
+                                       ]
+                                    },
+                                    "required": [
+                                       "googleServiceAccount"
+                                    ]
+                                 }
+                              ],
+                              "properties": {
+                                 "mode": {
+                                    "enum": [
+                                       "cluster"
+                                    ]
+                                 }
+                              }
+                           },
+                           {
+                              "not": {
+                                 "anyOf": [
+                                    {
+                                       "required": [
+                                          "googleServiceAccount"
+                                       ]
+                                    },
+                                    {
+                                       "required": [
+                                          "credentialSecretName"
+                                       ]
+                                    }
+                                 ]
+                              },
+                              "properties": {
+                                 "mode": {
+                                    "enum": [
+                                       "namespaced"
+                                    ]
+                                 }
+                              }
+                           }
+                        ],
+                        "description": "ConfigConnectorSpec defines the desired state of ConfigConnector",
+                        "properties": {
+                           "credentialSecretName": {
+                              "description": "The Kubernetes secret that contains the Google Service Account Key's credentials to be used by ConfigConnector to authenticate with Google Cloud APIs. This field is used only when in cluster mode. It's recommended to use `googleServiceAccount` when running ConfigConnector in Google Kubernetes Engine (GKE) clusters with Workload Identity enabled. This field cannot be specified together with `googleServiceAccount`.",
+                              "type": "string"
+                           },
+                           "googleServiceAccount": {
+                              "description": "The Google Service Account to be used by Config Connector to authenticate with Google Cloud APIs. This field is used only when running in cluster mode with Workload Identity enabled. See Google Kubernetes Engine (GKE) workload-identity (https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity) for details. This field cannot be specified together with `credentialSecretName`. For namespaced mode, use `googleServiceAccount` in ConfigConnectorContext CRD to specify the Google Service Account to be used to authenticate with Google Cloud APIs per namespace.",
+                              "type": "string"
+                           },
+                           "mode": {
+                              "description": "The mode that Config Connector will run in. This can be either 'cluster' or 'namespaced'. The default is 'namespaced'. Cluster mode uses a single Google Service Account to create and manage resources, even if you are using Config Connector to manage multiple Projects. You must specify either `credentialSecretName` or `googleServiceAccount` when in cluster mode, but not both. Namespaced mode allows you to use different Google service accounts for different Projects. When in namespaced mode, you must create a ConfigConnectorContext object per namespace that you want to enable Config Connector in, and each must set `googleServiceAccount` to specify the Google Service Account to be used to authenticate with Google Cloud APIs for the namespace.",
+                              "enum": [
+                                 "cluster",
+                                 "namespaced"
+                              ],
+                              "type": "string"
+                           }
+                        },
+                        "type": "object"
+                     },
+                     "status": {
+                        "description": "ConfigConnectorStatus defines the observed state of ConfigConnector",
+                        "properties": {
+                           "errors": {
+                              "items": {
+                                 "type": "string"
+                              },
+                              "type": "array"
+                           },
+                           "healthy": {
+                              "type": "boolean"
+                           },
+                           "phase": {
+                              "type": "string"
+                           }
+                        },
+                        "required": [
+                           "healthy"
+                        ],
+                        "type": "object"
+                     }
+                  },
+                  "type": "object"
+               }
+            },
+            "served": true,
+            "storage": true,
+            "subresources": {
+               "status": { }
+            }
+         }
+      ]
+   },
+   "status": {
+      "acceptedNames": {
+         "kind": "ConfigConnector",
+         "listKind": "ConfigConnectorList",
+         "plural": "configconnectors",
+         "singular": "configconnector"
+      },
+      "conditions": [
+         {
+            "lastTransitionTime": "2021-12-08T04:13:23Z",
+            "message": "no conflicts found",
+            "reason": "NoConflicts",
+            "status": "True",
+            "type": "NamesAccepted"
+         },
+         {
+            "lastTransitionTime": "2021-12-08T04:13:23Z",
+            "message": "the initial names have been accepted",
+            "reason": "InitialNamesAccepted",
+            "status": "True",
+            "type": "Established"
+         }
+      ],
+      "storedVersions": [
+         "v1beta1"
+      ]
+   }
+}

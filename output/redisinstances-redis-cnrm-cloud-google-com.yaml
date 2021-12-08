@@ -1,0 +1,346 @@
+{
+   "apiVersion": "apiextensions.k8s.io/v1",
+   "kind": "CustomResourceDefinition",
+   "metadata": {
+      "annotations": {
+         "cnrm.cloud.google.com/version": "1.67.0",
+         "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apiextensions.k8s.io/v1\",\"kind\":\"CustomResourceDefinition\",\"metadata\":{\"annotations\":{\"cnrm.cloud.google.com/version\":\"1.67.0\"},\"creationTimestamp\":null,\"labels\":{\"cnrm.cloud.google.com/managed-by-kcc\":\"true\",\"cnrm.cloud.google.com/stability-level\":\"stable\",\"cnrm.cloud.google.com/system\":\"true\",\"cnrm.cloud.google.com/tf2crd\":\"true\",\"core.cnrm.cloud.google.com/configconnector\":\"configconnector.core.cnrm.cloud.google.com\"},\"name\":\"redisinstances.redis.cnrm.cloud.google.com\",\"ownerReferences\":[{\"apiVersion\":\"core.cnrm.cloud.google.com/v1beta1\",\"blockOwnerDeletion\":true,\"controller\":true,\"kind\":\"ConfigConnector\",\"name\":\"configconnector.core.cnrm.cloud.google.com\",\"uid\":\"9356f250-6769-47be-89e1-e3ec05c1cf1a\"}]},\"spec\":{\"group\":\"redis.cnrm.cloud.google.com\",\"names\":{\"categories\":[\"gcp\"],\"kind\":\"RedisInstance\",\"plural\":\"redisinstances\",\"shortNames\":[\"gcpredisinstance\",\"gcpredisinstances\"],\"singular\":\"redisinstance\"},\"preserveUnknownFields\":false,\"scope\":\"Namespaced\",\"versions\":[{\"additionalPrinterColumns\":[{\"jsonPath\":\".metadata.creationTimestamp\",\"name\":\"Age\",\"type\":\"date\"},{\"description\":\"When 'True', the most recent reconcile of the resource succeeded\",\"jsonPath\":\".status.conditions[?(@.type=='Ready')].status\",\"name\":\"Ready\",\"type\":\"string\"},{\"description\":\"The reason for the value in 'Ready'\",\"jsonPath\":\".status.conditions[?(@.type=='Ready')].reason\",\"name\":\"Status\",\"type\":\"string\"},{\"description\":\"The last transition time for the value in 'Status'\",\"jsonPath\":\".status.conditions[?(@.type=='Ready')].lastTransitionTime\",\"name\":\"Status Age\",\"type\":\"date\"}],\"name\":\"v1beta1\",\"schema\":{\"openAPIV3Schema\":{\"properties\":{\"apiVersion\":{\"description\":\"apiVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources\",\"type\":\"string\"},\"kind\":{\"description\":\"kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds\",\"type\":\"string\"},\"metadata\":{\"type\":\"object\"},\"spec\":{\"properties\":{\"alternativeLocationId\":{\"description\":\"Immutable. Only applicable to STANDARD_HA tier which protects the instance\\nagainst zonal failures by provisioning it across two zones.\\nIf provided, it must be a different zone from the one provided in\\n[locationId].\",\"type\":\"string\"},\"authEnabled\":{\"description\":\"Optional. Indicates whether OSS Redis AUTH is enabled for the\\ninstance. If set to \\\"true\\\" AUTH is enabled on the instance.\\nDefault value is \\\"false\\\" meaning AUTH is disabled.\",\"type\":\"boolean\"},\"authString\":{\"description\":\"AUTH String set on the instance. This field will only be populated if auth_enabled is true.\",\"type\":\"string\"},\"authorizedNetworkRef\":{\"description\":\"The network to which the instance is connected. If left\\nunspecified, the default network will be used.\",\"oneOf\":[{\"not\":{\"required\":[\"external\"]},\"required\":[\"name\"]},{\"not\":{\"anyOf\":[{\"required\":[\"name\"]},{\"required\":[\"namespace\"]}]},\"required\":[\"external\"]}],\"properties\":{\"external\":{\"description\":\"The selfLink of a ComputeNetwork.\",\"type\":\"string\"},\"name\":{\"description\":\"Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names\",\"type\":\"string\"},\"namespace\":{\"description\":\"Namespace of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/\",\"type\":\"string\"}},\"type\":\"object\"},\"connectMode\":{\"description\":\"Immutable. The connection mode of the Redis instance. Default value: \\\"DIRECT_PEERING\\\" Possible values: [\\\"DIRECT_PEERING\\\", \\\"PRIVATE_SERVICE_ACCESS\\\"].\",\"type\":\"string\"},\"displayName\":{\"description\":\"An arbitrary and optional user-provided name for the instance.\",\"type\":\"string\"},\"locationId\":{\"description\":\"Immutable. The zone where the instance will be provisioned. If not provided,\\nthe service will choose a zone for the instance. For STANDARD_HA tier,\\ninstances will be created across two zones for protection against\\nzonal failures. If [alternativeLocationId] is also provided, it must\\nbe different from [locationId].\",\"type\":\"string\"},\"memorySizeGb\":{\"description\":\"Redis memory size in GiB.\",\"type\":\"integer\"},\"redisConfigs\":{\"additionalProperties\":{\"type\":\"string\"},\"description\":\"Redis configuration parameters, according to http://redis.io/topics/config.\\nPlease check Memorystore documentation for the list of supported parameters:\\nhttps://cloud.google.com/memorystore/docs/redis/reference/rest/v1/projects.locations.instances#Instance.FIELDS.redis_configs.\",\"type\":\"object\"},\"redisVersion\":{\"description\":\"The version of Redis software. If not provided, latest supported\\nversion will be used. Please check the API documentation linked \\nat the top for the latest valid values.\",\"type\":\"string\"},\"region\":{\"description\":\"Immutable. The name of the Redis region of the instance.\",\"type\":\"string\"},\"reservedIpRange\":{\"description\":\"Immutable. The CIDR range of internal addresses that are reserved for this\\ninstance. If not provided, the service will choose an unused /29\\nblock, for example, 10.0.0.0/29 or 192.168.0.0/29. Ranges must be\\nunique and non-overlapping with existing subnets in an authorized\\nnetwork.\",\"type\":\"string\"},\"resourceID\":{\"description\":\"Immutable. Optional. The name of the resource. Used for creation and acquisition. When unset, the value of `metadata.name` is used as the default.\",\"type\":\"string\"},\"tier\":{\"description\":\"Immutable. The service tier of the instance. Must be one of these values:\\n\\n- BASIC: standalone instance\\n- STANDARD_HA: highly available primary/replica instances Default value: \\\"BASIC\\\" Possible values: [\\\"BASIC\\\", \\\"STANDARD_HA\\\"].\",\"type\":\"string\"},\"transitEncryptionMode\":{\"description\":\"Immutable. The TLS mode of the Redis instance, If not provided, TLS is disabled for the instance.\\n\\n- SERVER_AUTHENTICATION: Client to Server traffic encryption enabled with server authentcation Default value: \\\"DISABLED\\\" Possible values: [\\\"SERVER_AUTHENTICATION\\\", \\\"DISABLED\\\"].\",\"type\":\"string\"}},\"required\":[\"memorySizeGb\",\"region\"],\"type\":\"object\"},\"status\":{\"properties\":{\"conditions\":{\"description\":\"Conditions represent the latest available observation of the resource's current state.\",\"items\":{\"properties\":{\"lastTransitionTime\":{\"description\":\"Last time the condition transitioned from one status to another.\",\"type\":\"string\"},\"message\":{\"description\":\"Human-readable message indicating details about last transition.\",\"type\":\"string\"},\"reason\":{\"description\":\"Unique, one-word, CamelCase reason for the condition's last transition.\",\"type\":\"string\"},\"status\":{\"description\":\"Status is the status of the condition. Can be True, False, Unknown.\",\"type\":\"string\"},\"type\":{\"description\":\"Type is the type of the condition.\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"createTime\":{\"description\":\"The time the instance was created in RFC3339 UTC \\\"Zulu\\\" format,\\naccurate to nanoseconds.\",\"type\":\"string\"},\"currentLocationId\":{\"description\":\"The current zone where the Redis endpoint is placed.\\nFor Basic Tier instances, this will always be the same as the\\n[locationId] provided by the user at creation time. For Standard Tier\\ninstances, this can be either [locationId] or [alternativeLocationId]\\nand can change after a failover event.\",\"type\":\"string\"},\"host\":{\"description\":\"Hostname or IP address of the exposed Redis endpoint used by clients\\nto connect to the service.\",\"type\":\"string\"},\"observedGeneration\":{\"description\":\"ObservedGeneration is the generation of the resource that was most recently observed by the Config Connector controller. If this is equal to metadata.generation, then that means that the current reported status reflects the most recent desired state of the resource.\",\"type\":\"integer\"},\"persistenceIamIdentity\":{\"description\":\"Output only. Cloud IAM identity used by import / export operations\\nto transfer data to/from Cloud Storage. Format is \\\"serviceAccount:\\\".\\nThe value may change over time for a given instance so should be\\nchecked before each import/export operation.\",\"type\":\"string\"},\"port\":{\"description\":\"The port number of the exposed Redis endpoint.\",\"type\":\"integer\"},\"serverCaCerts\":{\"description\":\"List of server CA certificates for the instance.\",\"items\":{\"properties\":{\"cert\":{\"description\":\"Serial number, as extracted from the certificate.\",\"type\":\"string\"},\"createTime\":{\"description\":\"The time when the certificate was created.\",\"type\":\"string\"},\"expireTime\":{\"description\":\"The time when the certificate expires.\",\"type\":\"string\"},\"serialNumber\":{\"description\":\"Serial number, as extracted from the certificate.\",\"type\":\"string\"},\"sha1Fingerprint\":{\"description\":\"Sha1 Fingerprint of the certificate.\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}},\"type\":\"object\"}},\"required\":[\"spec\"],\"type\":\"object\"}},\"served\":true,\"storage\":true,\"subresources\":{\"status\":{}}}]},\"status\":{\"acceptedNames\":{\"kind\":\"\",\"plural\":\"\"},\"conditions\":[],\"storedVersions\":[]}}\n"
+      },
+      "creationTimestamp": "2021-12-08T04:14:44Z",
+      "generation": 1,
+      "labels": {
+         "cnrm.cloud.google.com/managed-by-kcc": "true",
+         "cnrm.cloud.google.com/stability-level": "stable",
+         "cnrm.cloud.google.com/system": "true",
+         "cnrm.cloud.google.com/tf2crd": "true",
+         "core.cnrm.cloud.google.com/configconnector": "configconnector.core.cnrm.cloud.google.com"
+      },
+      "name": "redisinstances.redis.cnrm.cloud.google.com",
+      "ownerReferences": [
+         {
+            "apiVersion": "core.cnrm.cloud.google.com/v1beta1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "ConfigConnector",
+            "name": "configconnector.core.cnrm.cloud.google.com",
+            "uid": "9356f250-6769-47be-89e1-e3ec05c1cf1a"
+         }
+      ],
+      "resourceVersion": "4241785",
+      "uid": "e492938c-eb23-4f22-b42d-73ae100ff6b3"
+   },
+   "spec": {
+      "conversion": {
+         "strategy": "None"
+      },
+      "group": "redis.cnrm.cloud.google.com",
+      "names": {
+         "categories": [
+            "gcp"
+         ],
+         "kind": "RedisInstance",
+         "listKind": "RedisInstanceList",
+         "plural": "redisinstances",
+         "shortNames": [
+            "gcpredisinstance",
+            "gcpredisinstances"
+         ],
+         "singular": "redisinstance"
+      },
+      "scope": "Namespaced",
+      "versions": [
+         {
+            "additionalPrinterColumns": [
+               {
+                  "jsonPath": ".metadata.creationTimestamp",
+                  "name": "Age",
+                  "type": "date"
+               },
+               {
+                  "description": "When 'True', the most recent reconcile of the resource succeeded",
+                  "jsonPath": ".status.conditions[?(@.type=='Ready')].status",
+                  "name": "Ready",
+                  "type": "string"
+               },
+               {
+                  "description": "The reason for the value in 'Ready'",
+                  "jsonPath": ".status.conditions[?(@.type=='Ready')].reason",
+                  "name": "Status",
+                  "type": "string"
+               },
+               {
+                  "description": "The last transition time for the value in 'Status'",
+                  "jsonPath": ".status.conditions[?(@.type=='Ready')].lastTransitionTime",
+                  "name": "Status Age",
+                  "type": "date"
+               }
+            ],
+            "name": "v1beta1",
+            "schema": {
+               "openAPIV3Schema": {
+                  "properties": {
+                     "apiVersion": {
+                        "description": "apiVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources",
+                        "type": "string"
+                     },
+                     "kind": {
+                        "description": "kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+                        "type": "string"
+                     },
+                     "metadata": {
+                        "type": "object"
+                     },
+                     "spec": {
+                        "properties": {
+                           "alternativeLocationId": {
+                              "description": "Immutable. Only applicable to STANDARD_HA tier which protects the instance\nagainst zonal failures by provisioning it across two zones.\nIf provided, it must be a different zone from the one provided in\n[locationId].",
+                              "type": "string"
+                           },
+                           "authEnabled": {
+                              "description": "Optional. Indicates whether OSS Redis AUTH is enabled for the\ninstance. If set to \"true\" AUTH is enabled on the instance.\nDefault value is \"false\" meaning AUTH is disabled.",
+                              "type": "boolean"
+                           },
+                           "authString": {
+                              "description": "AUTH String set on the instance. This field will only be populated if auth_enabled is true.",
+                              "type": "string"
+                           },
+                           "authorizedNetworkRef": {
+                              "description": "The network to which the instance is connected. If left\nunspecified, the default network will be used.",
+                              "oneOf": [
+                                 {
+                                    "not": {
+                                       "required": [
+                                          "external"
+                                       ]
+                                    },
+                                    "required": [
+                                       "name"
+                                    ]
+                                 },
+                                 {
+                                    "not": {
+                                       "anyOf": [
+                                          {
+                                             "required": [
+                                                "name"
+                                             ]
+                                          },
+                                          {
+                                             "required": [
+                                                "namespace"
+                                             ]
+                                          }
+                                       ]
+                                    },
+                                    "required": [
+                                       "external"
+                                    ]
+                                 }
+                              ],
+                              "properties": {
+                                 "external": {
+                                    "description": "The selfLink of a ComputeNetwork.",
+                                    "type": "string"
+                                 },
+                                 "name": {
+                                    "description": "Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names",
+                                    "type": "string"
+                                 },
+                                 "namespace": {
+                                    "description": "Namespace of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/",
+                                    "type": "string"
+                                 }
+                              },
+                              "type": "object"
+                           },
+                           "connectMode": {
+                              "description": "Immutable. The connection mode of the Redis instance. Default value: \"DIRECT_PEERING\" Possible values: [\"DIRECT_PEERING\", \"PRIVATE_SERVICE_ACCESS\"].",
+                              "type": "string"
+                           },
+                           "displayName": {
+                              "description": "An arbitrary and optional user-provided name for the instance.",
+                              "type": "string"
+                           },
+                           "locationId": {
+                              "description": "Immutable. The zone where the instance will be provisioned. If not provided,\nthe service will choose a zone for the instance. For STANDARD_HA tier,\ninstances will be created across two zones for protection against\nzonal failures. If [alternativeLocationId] is also provided, it must\nbe different from [locationId].",
+                              "type": "string"
+                           },
+                           "memorySizeGb": {
+                              "description": "Redis memory size in GiB.",
+                              "type": "integer"
+                           },
+                           "redisConfigs": {
+                              "additionalProperties": {
+                                 "type": "string"
+                              },
+                              "description": "Redis configuration parameters, according to http://redis.io/topics/config.\nPlease check Memorystore documentation for the list of supported parameters:\nhttps://cloud.google.com/memorystore/docs/redis/reference/rest/v1/projects.locations.instances#Instance.FIELDS.redis_configs.",
+                              "type": "object"
+                           },
+                           "redisVersion": {
+                              "description": "The version of Redis software. If not provided, latest supported\nversion will be used. Please check the API documentation linked \nat the top for the latest valid values.",
+                              "type": "string"
+                           },
+                           "region": {
+                              "description": "Immutable. The name of the Redis region of the instance.",
+                              "type": "string"
+                           },
+                           "reservedIpRange": {
+                              "description": "Immutable. The CIDR range of internal addresses that are reserved for this\ninstance. If not provided, the service will choose an unused /29\nblock, for example, 10.0.0.0/29 or 192.168.0.0/29. Ranges must be\nunique and non-overlapping with existing subnets in an authorized\nnetwork.",
+                              "type": "string"
+                           },
+                           "resourceID": {
+                              "description": "Immutable. Optional. The name of the resource. Used for creation and acquisition. When unset, the value of `metadata.name` is used as the default.",
+                              "type": "string"
+                           },
+                           "tier": {
+                              "description": "Immutable. The service tier of the instance. Must be one of these values:\n\n- BASIC: standalone instance\n- STANDARD_HA: highly available primary/replica instances Default value: \"BASIC\" Possible values: [\"BASIC\", \"STANDARD_HA\"].",
+                              "type": "string"
+                           },
+                           "transitEncryptionMode": {
+                              "description": "Immutable. The TLS mode of the Redis instance, If not provided, TLS is disabled for the instance.\n\n- SERVER_AUTHENTICATION: Client to Server traffic encryption enabled with server authentcation Default value: \"DISABLED\" Possible values: [\"SERVER_AUTHENTICATION\", \"DISABLED\"].",
+                              "type": "string"
+                           }
+                        },
+                        "required": [
+                           "memorySizeGb",
+                           "region"
+                        ],
+                        "type": "object"
+                     },
+                     "status": {
+                        "properties": {
+                           "conditions": {
+                              "description": "Conditions represent the latest available observation of the resource's current state.",
+                              "items": {
+                                 "properties": {
+                                    "lastTransitionTime": {
+                                       "description": "Last time the condition transitioned from one status to another.",
+                                       "type": "string"
+                                    },
+                                    "message": {
+                                       "description": "Human-readable message indicating details about last transition.",
+                                       "type": "string"
+                                    },
+                                    "reason": {
+                                       "description": "Unique, one-word, CamelCase reason for the condition's last transition.",
+                                       "type": "string"
+                                    },
+                                    "status": {
+                                       "description": "Status is the status of the condition. Can be True, False, Unknown.",
+                                       "type": "string"
+                                    },
+                                    "type": {
+                                       "description": "Type is the type of the condition.",
+                                       "type": "string"
+                                    }
+                                 },
+                                 "type": "object"
+                              },
+                              "type": "array"
+                           },
+                           "createTime": {
+                              "description": "The time the instance was created in RFC3339 UTC \"Zulu\" format,\naccurate to nanoseconds.",
+                              "type": "string"
+                           },
+                           "currentLocationId": {
+                              "description": "The current zone where the Redis endpoint is placed.\nFor Basic Tier instances, this will always be the same as the\n[locationId] provided by the user at creation time. For Standard Tier\ninstances, this can be either [locationId] or [alternativeLocationId]\nand can change after a failover event.",
+                              "type": "string"
+                           },
+                           "host": {
+                              "description": "Hostname or IP address of the exposed Redis endpoint used by clients\nto connect to the service.",
+                              "type": "string"
+                           },
+                           "observedGeneration": {
+                              "description": "ObservedGeneration is the generation of the resource that was most recently observed by the Config Connector controller. If this is equal to metadata.generation, then that means that the current reported status reflects the most recent desired state of the resource.",
+                              "type": "integer"
+                           },
+                           "persistenceIamIdentity": {
+                              "description": "Output only. Cloud IAM identity used by import / export operations\nto transfer data to/from Cloud Storage. Format is \"serviceAccount:\".\nThe value may change over time for a given instance so should be\nchecked before each import/export operation.",
+                              "type": "string"
+                           },
+                           "port": {
+                              "description": "The port number of the exposed Redis endpoint.",
+                              "type": "integer"
+                           },
+                           "serverCaCerts": {
+                              "description": "List of server CA certificates for the instance.",
+                              "items": {
+                                 "properties": {
+                                    "cert": {
+                                       "description": "Serial number, as extracted from the certificate.",
+                                       "type": "string"
+                                    },
+                                    "createTime": {
+                                       "description": "The time when the certificate was created.",
+                                       "type": "string"
+                                    },
+                                    "expireTime": {
+                                       "description": "The time when the certificate expires.",
+                                       "type": "string"
+                                    },
+                                    "serialNumber": {
+                                       "description": "Serial number, as extracted from the certificate.",
+                                       "type": "string"
+                                    },
+                                    "sha1Fingerprint": {
+                                       "description": "Sha1 Fingerprint of the certificate.",
+                                       "type": "string"
+                                    }
+                                 },
+                                 "type": "object"
+                              },
+                              "type": "array"
+                           }
+                        },
+                        "type": "object"
+                     }
+                  },
+                  "required": [
+                     "spec"
+                  ],
+                  "type": "object"
+               }
+            },
+            "served": true,
+            "storage": true,
+            "subresources": {
+               "status": { }
+            }
+         }
+      ]
+   },
+   "status": {
+      "acceptedNames": {
+         "categories": [
+            "gcp"
+         ],
+         "kind": "RedisInstance",
+         "listKind": "RedisInstanceList",
+         "plural": "redisinstances",
+         "shortNames": [
+            "gcpredisinstance",
+            "gcpredisinstances"
+         ],
+         "singular": "redisinstance"
+      },
+      "conditions": [
+         {
+            "lastTransitionTime": "2021-12-08T04:14:44Z",
+            "message": "no conflicts found",
+            "reason": "NoConflicts",
+            "status": "True",
+            "type": "NamesAccepted"
+         },
+         {
+            "lastTransitionTime": "2021-12-08T04:14:45Z",
+            "message": "the initial names have been accepted",
+            "reason": "InitialNamesAccepted",
+            "status": "True",
+            "type": "Established"
+         }
+      ],
+      "storedVersions": [
+         "v1beta1"
+      ]
+   }
+}

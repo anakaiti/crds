@@ -1,0 +1,197 @@
+{
+   "apiVersion": "apiextensions.k8s.io/v1",
+   "kind": "CustomResourceDefinition",
+   "metadata": {
+      "annotations": {
+         "api-approved.kubernetes.io": "https://github.com/kubernetes-csi/external-snapshotter/pull/419",
+         "components.gke.io/component-name": "snapshot-controller",
+         "components.gke.io/component-version": "0.5.6",
+         "components.gke.io/layer": "addon",
+         "controller-gen.kubebuilder.io/version": "v0.4.0",
+         "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apiextensions.k8s.io/v1\",\"kind\":\"CustomResourceDefinition\",\"metadata\":{\"annotations\":{\"api-approved.kubernetes.io\":\"https://github.com/kubernetes-csi/external-snapshotter/pull/419\",\"components.gke.io/component-name\":\"snapshot-controller\",\"components.gke.io/component-version\":\"0.5.6\",\"components.gke.io/layer\":\"addon\",\"controller-gen.kubebuilder.io/version\":\"v0.4.0\"},\"creationTimestamp\":null,\"labels\":{\"addonmanager.kubernetes.io/mode\":\"Reconcile\"},\"name\":\"volumesnapshotclasses.snapshot.storage.k8s.io\"},\"spec\":{\"group\":\"snapshot.storage.k8s.io\",\"names\":{\"kind\":\"VolumeSnapshotClass\",\"listKind\":\"VolumeSnapshotClassList\",\"plural\":\"volumesnapshotclasses\",\"singular\":\"volumesnapshotclass\"},\"scope\":\"Cluster\",\"versions\":[{\"additionalPrinterColumns\":[{\"jsonPath\":\".driver\",\"name\":\"Driver\",\"type\":\"string\"},{\"description\":\"Determines whether a VolumeSnapshotContent created through the VolumeSnapshotClass should be deleted when its bound VolumeSnapshot is deleted.\",\"jsonPath\":\".deletionPolicy\",\"name\":\"DeletionPolicy\",\"type\":\"string\"},{\"jsonPath\":\".metadata.creationTimestamp\",\"name\":\"Age\",\"type\":\"date\"}],\"name\":\"v1\",\"schema\":{\"openAPIV3Schema\":{\"description\":\"VolumeSnapshotClass specifies parameters that a underlying storage system uses when creating a volume snapshot. A specific VolumeSnapshotClass is used by specifying its name in a VolumeSnapshot object. VolumeSnapshotClasses are non-namespaced\",\"properties\":{\"apiVersion\":{\"description\":\"APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources\",\"type\":\"string\"},\"deletionPolicy\":{\"description\":\"deletionPolicy determines whether a VolumeSnapshotContent created through the VolumeSnapshotClass should be deleted when its bound VolumeSnapshot is deleted. Supported values are \\\"Retain\\\" and \\\"Delete\\\". \\\"Retain\\\" means that the VolumeSnapshotContent and its physical snapshot on underlying storage system are kept. \\\"Delete\\\" means that the VolumeSnapshotContent and its physical snapshot on underlying storage system are deleted. Required.\",\"enum\":[\"Delete\",\"Retain\"],\"type\":\"string\"},\"driver\":{\"description\":\"driver is the name of the storage driver that handles this VolumeSnapshotClass. Required.\",\"type\":\"string\"},\"kind\":{\"description\":\"Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds\",\"type\":\"string\"},\"parameters\":{\"additionalProperties\":{\"type\":\"string\"},\"description\":\"parameters is a key-value map with storage driver specific parameters for creating snapshots. These values are opaque to Kubernetes.\",\"type\":\"object\"}},\"required\":[\"deletionPolicy\",\"driver\"],\"type\":\"object\"}},\"served\":true,\"storage\":false,\"subresources\":{}},{\"additionalPrinterColumns\":[{\"jsonPath\":\".driver\",\"name\":\"Driver\",\"type\":\"string\"},{\"description\":\"Determines whether a VolumeSnapshotContent created through the VolumeSnapshotClass should be deleted when its bound VolumeSnapshot is deleted.\",\"jsonPath\":\".deletionPolicy\",\"name\":\"DeletionPolicy\",\"type\":\"string\"},{\"jsonPath\":\".metadata.creationTimestamp\",\"name\":\"Age\",\"type\":\"date\"}],\"name\":\"v1beta1\",\"schema\":{\"openAPIV3Schema\":{\"description\":\"VolumeSnapshotClass specifies parameters that a underlying storage system uses when creating a volume snapshot. A specific VolumeSnapshotClass is used by specifying its name in a VolumeSnapshot object. VolumeSnapshotClasses are non-namespaced\",\"properties\":{\"apiVersion\":{\"description\":\"APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources\",\"type\":\"string\"},\"deletionPolicy\":{\"description\":\"deletionPolicy determines whether a VolumeSnapshotContent created through the VolumeSnapshotClass should be deleted when its bound VolumeSnapshot is deleted. Supported values are \\\"Retain\\\" and \\\"Delete\\\". \\\"Retain\\\" means that the VolumeSnapshotContent and its physical snapshot on underlying storage system are kept. \\\"Delete\\\" means that the VolumeSnapshotContent and its physical snapshot on underlying storage system are deleted. Required.\",\"enum\":[\"Delete\",\"Retain\"],\"type\":\"string\"},\"driver\":{\"description\":\"driver is the name of the storage driver that handles this VolumeSnapshotClass. Required.\",\"type\":\"string\"},\"kind\":{\"description\":\"Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds\",\"type\":\"string\"},\"parameters\":{\"additionalProperties\":{\"type\":\"string\"},\"description\":\"parameters is a key-value map with storage driver specific parameters for creating snapshots. These values are opaque to Kubernetes.\",\"type\":\"object\"}},\"required\":[\"deletionPolicy\",\"driver\"],\"type\":\"object\"}},\"served\":true,\"storage\":true,\"subresources\":{}}]}}\n"
+      },
+      "creationTimestamp": "2021-11-29T20:52:14Z",
+      "generation": 1,
+      "labels": {
+         "addonmanager.kubernetes.io/mode": "Reconcile"
+      },
+      "name": "volumesnapshotclasses.snapshot.storage.k8s.io",
+      "resourceVersion": "633",
+      "uid": "2d668f2b-9105-4f3e-aed5-f0331f922e9c"
+   },
+   "spec": {
+      "conversion": {
+         "strategy": "None"
+      },
+      "group": "snapshot.storage.k8s.io",
+      "names": {
+         "kind": "VolumeSnapshotClass",
+         "listKind": "VolumeSnapshotClassList",
+         "plural": "volumesnapshotclasses",
+         "singular": "volumesnapshotclass"
+      },
+      "scope": "Cluster",
+      "versions": [
+         {
+            "additionalPrinterColumns": [
+               {
+                  "jsonPath": ".driver",
+                  "name": "Driver",
+                  "type": "string"
+               },
+               {
+                  "description": "Determines whether a VolumeSnapshotContent created through the VolumeSnapshotClass should be deleted when its bound VolumeSnapshot is deleted.",
+                  "jsonPath": ".deletionPolicy",
+                  "name": "DeletionPolicy",
+                  "type": "string"
+               },
+               {
+                  "jsonPath": ".metadata.creationTimestamp",
+                  "name": "Age",
+                  "type": "date"
+               }
+            ],
+            "name": "v1",
+            "schema": {
+               "openAPIV3Schema": {
+                  "description": "VolumeSnapshotClass specifies parameters that a underlying storage system uses when creating a volume snapshot. A specific VolumeSnapshotClass is used by specifying its name in a VolumeSnapshot object. VolumeSnapshotClasses are non-namespaced",
+                  "properties": {
+                     "apiVersion": {
+                        "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                        "type": "string"
+                     },
+                     "deletionPolicy": {
+                        "description": "deletionPolicy determines whether a VolumeSnapshotContent created through the VolumeSnapshotClass should be deleted when its bound VolumeSnapshot is deleted. Supported values are \"Retain\" and \"Delete\". \"Retain\" means that the VolumeSnapshotContent and its physical snapshot on underlying storage system are kept. \"Delete\" means that the VolumeSnapshotContent and its physical snapshot on underlying storage system are deleted. Required.",
+                        "enum": [
+                           "Delete",
+                           "Retain"
+                        ],
+                        "type": "string"
+                     },
+                     "driver": {
+                        "description": "driver is the name of the storage driver that handles this VolumeSnapshotClass. Required.",
+                        "type": "string"
+                     },
+                     "kind": {
+                        "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                        "type": "string"
+                     },
+                     "parameters": {
+                        "additionalProperties": {
+                           "type": "string"
+                        },
+                        "description": "parameters is a key-value map with storage driver specific parameters for creating snapshots. These values are opaque to Kubernetes.",
+                        "type": "object"
+                     }
+                  },
+                  "required": [
+                     "deletionPolicy",
+                     "driver"
+                  ],
+                  "type": "object"
+               }
+            },
+            "served": true,
+            "storage": false,
+            "subresources": { }
+         },
+         {
+            "additionalPrinterColumns": [
+               {
+                  "jsonPath": ".driver",
+                  "name": "Driver",
+                  "type": "string"
+               },
+               {
+                  "description": "Determines whether a VolumeSnapshotContent created through the VolumeSnapshotClass should be deleted when its bound VolumeSnapshot is deleted.",
+                  "jsonPath": ".deletionPolicy",
+                  "name": "DeletionPolicy",
+                  "type": "string"
+               },
+               {
+                  "jsonPath": ".metadata.creationTimestamp",
+                  "name": "Age",
+                  "type": "date"
+               }
+            ],
+            "name": "v1beta1",
+            "schema": {
+               "openAPIV3Schema": {
+                  "description": "VolumeSnapshotClass specifies parameters that a underlying storage system uses when creating a volume snapshot. A specific VolumeSnapshotClass is used by specifying its name in a VolumeSnapshot object. VolumeSnapshotClasses are non-namespaced",
+                  "properties": {
+                     "apiVersion": {
+                        "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+                        "type": "string"
+                     },
+                     "deletionPolicy": {
+                        "description": "deletionPolicy determines whether a VolumeSnapshotContent created through the VolumeSnapshotClass should be deleted when its bound VolumeSnapshot is deleted. Supported values are \"Retain\" and \"Delete\". \"Retain\" means that the VolumeSnapshotContent and its physical snapshot on underlying storage system are kept. \"Delete\" means that the VolumeSnapshotContent and its physical snapshot on underlying storage system are deleted. Required.",
+                        "enum": [
+                           "Delete",
+                           "Retain"
+                        ],
+                        "type": "string"
+                     },
+                     "driver": {
+                        "description": "driver is the name of the storage driver that handles this VolumeSnapshotClass. Required.",
+                        "type": "string"
+                     },
+                     "kind": {
+                        "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+                        "type": "string"
+                     },
+                     "parameters": {
+                        "additionalProperties": {
+                           "type": "string"
+                        },
+                        "description": "parameters is a key-value map with storage driver specific parameters for creating snapshots. These values are opaque to Kubernetes.",
+                        "type": "object"
+                     }
+                  },
+                  "required": [
+                     "deletionPolicy",
+                     "driver"
+                  ],
+                  "type": "object"
+               }
+            },
+            "served": true,
+            "storage": true,
+            "subresources": { }
+         }
+      ]
+   },
+   "status": {
+      "acceptedNames": {
+         "kind": "VolumeSnapshotClass",
+         "listKind": "VolumeSnapshotClassList",
+         "plural": "volumesnapshotclasses",
+         "singular": "volumesnapshotclass"
+      },
+      "conditions": [
+         {
+            "lastTransitionTime": "2021-11-29T20:52:14Z",
+            "message": "no conflicts found",
+            "reason": "NoConflicts",
+            "status": "True",
+            "type": "NamesAccepted"
+         },
+         {
+            "lastTransitionTime": "2021-11-29T20:52:14Z",
+            "message": "the initial names have been accepted",
+            "reason": "InitialNamesAccepted",
+            "status": "True",
+            "type": "Established"
+         },
+         {
+            "lastTransitionTime": "2021-11-29T20:52:14Z",
+            "message": "approved in https://github.com/kubernetes-csi/external-snapshotter/pull/419",
+            "reason": "ApprovedAnnotation",
+            "status": "True",
+            "type": "KubernetesAPIApprovalPolicyConformant"
+         }
+      ],
+      "storedVersions": [
+         "v1beta1"
+      ]
+   }
+}
